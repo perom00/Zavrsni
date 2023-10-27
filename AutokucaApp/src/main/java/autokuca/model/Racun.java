@@ -2,6 +2,7 @@ package autokuca.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import java.util.Date;
 
 
 @Entity
@@ -12,6 +13,11 @@ public class Racun extends Entitet{
 	private  Prodavac prodavac;
         @ManyToOne
 	private Vozilo vozilo;
+        
+        private Date datum;
+        
+        
+        
 	
         
 
@@ -44,6 +50,16 @@ public class Racun extends Entitet{
 	public void setVozilo(Vozilo vozilo) {
 		this.vozilo = vozilo;
 	}
+
+        public Date getDatum() {
+            return datum;
+        }
+
+        public void setDatum(Date datum) {
+            this.datum = datum;
+        }
+        
+        
 
     @Override
     public String toString() {

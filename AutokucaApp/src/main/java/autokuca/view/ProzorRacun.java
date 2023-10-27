@@ -14,7 +14,17 @@ import autokuca.model.Racun;
 import autokuca.model.Vozilo;
 import autokuca.util.Alati;
 import autokuca.util.AutokucaException;
+import com.github.lgooddatepicker.components.DatePickerSettings;
+import com.github.lgooddatepicker.components.TimePickerSettings;
 import java.io.FileOutputStream;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
@@ -44,8 +54,34 @@ public class ProzorRacun extends javax.swing.JFrame implements AutokucaViewSucel
         ucitajKupca();
         ucitajProdavaca();
         ucitajVozilo();
+        definirajDatum();
         ucitaj();
     }
+    
+    
+    private void definirajDatum() {
+        DatePickerSettings dps= new DatePickerSettings(Locale.of("hr","HR"));
+        dps.setFormatForDatesCommonEra("dd.MM.YYYY");
+        dps.setTranslationClear("Očisti");
+        dps.setTranslationToday("Danas");
+        dtpDatum.datePicker.setSettings(dps);
+        
+        TimePickerSettings tps=dtpDatum.timePicker.getSettings();
+        
+        tps.setFormatForDisplayTime("HH:mm");
+        tps.use24HourClockFormat();
+        
+        ArrayList<LocalTime> lista= new ArrayList<>();
+        for(int i=0;i<24;i++){
+            for(int j=0;j<60;j++){
+                lista.add(LocalTime.of(i, j));
+            }
+        }
+        tps.generatePotentialMenuTimes(lista);
+        
+    }
+    
+    
 
     public ObradaRacun getObradaRacun() {
         return obrada;
@@ -128,6 +164,8 @@ public class ProzorRacun extends javax.swing.JFrame implements AutokucaViewSucel
         jLabel4 = new javax.swing.JLabel();
         btnIspisRacuna = new javax.swing.JButton();
         btnPVozilo = new javax.swing.JButton();
+        dtpDatum = new com.github.lgooddatepicker.components.DateTimePicker();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -211,6 +249,8 @@ public class ProzorRacun extends javax.swing.JFrame implements AutokucaViewSucel
             }
         });
 
+        jLabel5.setText("Datum i vrijeme");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -225,31 +265,34 @@ public class ProzorRacun extends javax.swing.JFrame implements AutokucaViewSucel
                             .addComponent(txtUvjet, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))
                         .addGap(33, 33, 33)
                         .addComponent(btnTrazi)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(66, 66, 66)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cmbKupac, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(cmbProdavac, javax.swing.GroupLayout.Alignment.LEADING, 0, 160, Short.MAX_VALUE)
+                                        .addComponent(cmbVozilo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGap(18, 18, 18)
+                                    .addComponent(btnPVozilo, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(dtpDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel5)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGap(91, 91, 91)
+                            .addComponent(btnIspisRacuna, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(cmbKupac, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(cmbProdavac, javax.swing.GroupLayout.Alignment.LEADING, 0, 160, Short.MAX_VALUE)
-                                    .addComponent(cmbVozilo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addComponent(btnPVozilo, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
+                        .addGap(82, 82, 82)
                         .addComponent(btnDodaj)
-                        .addGap(67, 67, 67)
+                        .addGap(54, 54, 54)
                         .addComponent(btnObrisi)
-                        .addGap(28, 28, 28)
-                        .addComponent(btnPromjeni))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addComponent(btnIspisRacuna, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnPromjeni)))
                 .addContainerGap(98, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -269,14 +312,18 @@ public class ProzorRacun extends javax.swing.JFrame implements AutokucaViewSucel
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(cmbProdavac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnObrisi)
-                    .addComponent(btnDodaj)
-                    .addComponent(btnPromjeni))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addComponent(dtpDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDodaj)
+                    .addComponent(btnObrisi)
+                    .addComponent(btnPromjeni))
+                .addGap(18, 18, 18)
                 .addComponent(btnIspisRacuna)
-                .addGap(38, 38, 38))
+                .addGap(20, 20, 20))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -434,6 +481,10 @@ public class ProzorRacun extends javax.swing.JFrame implements AutokucaViewSucel
     XWPFParagraph cijena=document.createParagraph();
     XWPFRun cijenaRun=cijena.createRun();
     cijenaRun.setText("Cijena vozila: "+  e.getVozilo().getCijena()+"€");
+    
+    XWPFParagraph datum=document.createParagraph();
+    XWPFRun datumFRun=datum.createRun();
+    datumFRun.setText("Datum izdavanja računa:" + e.getDatum());
 
     try {
         JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getFileSystemView().getHomeDirectory());
@@ -476,10 +527,12 @@ public class ProzorRacun extends javax.swing.JFrame implements AutokucaViewSucel
     private javax.swing.JComboBox<Kupac> cmbKupac;
     private javax.swing.JComboBox<Prodavac> cmbProdavac;
     private javax.swing.JComboBox<Vozilo> cmbVozilo;
+    private com.github.lgooddatepicker.components.DateTimePicker dtpDatum;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<Racun> lstPodaci;
     private javax.swing.JTextField txtUvjet;
@@ -502,6 +555,14 @@ public class ProzorRacun extends javax.swing.JFrame implements AutokucaViewSucel
         e.setProdavac((Prodavac)cmbProdavac.getSelectedItem());
         e.setVozilo((Vozilo)cmbVozilo.getSelectedItem());
         
+        LocalDate ld= dtpDatum.datePicker.getDate();
+        LocalTime lt=dtpDatum.timePicker.getTime();
+        
+        LocalDateTime ldt= LocalDateTime.of(ld, lt);
+        
+        e.setDatum(Date.from(ldt.atZone(ZoneId.systemDefault()).toInstant()));
+        
+        
         
     }
       
@@ -514,8 +575,22 @@ public class ProzorRacun extends javax.swing.JFrame implements AutokucaViewSucel
         cmbProdavac.setSelectedItem(e.getProdavac());
         cmbVozilo.setSelectedItem(e.getVozilo());
         
+        if (e.getDatum() == null) {
+            dtpDatum.datePicker.setDate(null);
+            dtpDatum.timePicker.setTime(null);
+        } else {
+            LocalDateTime ldt = e.getDatum().toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDateTime();
+            LocalDate ld = ldt.toLocalDate();
+            LocalTime lt = ldt.toLocalTime();
+            dtpDatum.datePicker.setDate(ld);
+            dtpDatum.timePicker.setTime(lt);
+}
+        }
+        
         
        
         
-    }
+    
 }
