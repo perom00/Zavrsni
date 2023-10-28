@@ -14,7 +14,7 @@ public class Racun extends Entitet{
         @ManyToOne
 	private Vozilo vozilo;
         
-        private Date datum;
+        private Date datumPocetka;
         
         
         
@@ -51,13 +51,15 @@ public class Racun extends Entitet{
 		this.vozilo = vozilo;
 	}
 
-        public Date getDatum() {
-            return datum;
-        }
+    public Date getDatumPocetka() {
+        return datumPocetka;
+    }
 
-        public void setDatum(Date datum) {
-            this.datum = datum;
-        }
+    public void setDatumPocetka(Date datumPocetka) {
+        this.datumPocetka = datumPocetka;
+    }
+
+       
         
         
 

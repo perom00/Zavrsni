@@ -55,7 +55,7 @@
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="btnPVozilo" min="-2" pref="115" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="dtpDatum" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="dtpDatumPocetka" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -98,7 +98,7 @@
               <EmptySpace max="32767" attributes="0"/>
               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="dtpDatum" min="-2" max="-2" attributes="0"/>
+              <Component id="dtpDatumPocetka" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnDodaj" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -255,7 +255,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPVoziloActionPerformed"/>
       </Events>
     </Component>
-    <Component class="com.github.lgooddatepicker.components.DateTimePicker" name="dtpDatum">
+    <Component class="com.github.lgooddatepicker.components.DateTimePicker" name="dtpDatumPocetka">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
       <Properties>

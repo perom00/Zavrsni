@@ -17,7 +17,6 @@ import autokuca.util.AutokucaException;
 import com.github.lgooddatepicker.components.DatePickerSettings;
 import com.github.lgooddatepicker.components.TimePickerSettings;
 import java.io.FileOutputStream;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -54,32 +53,35 @@ public class ProzorRacun extends javax.swing.JFrame implements AutokucaViewSucel
         ucitajKupca();
         ucitajProdavaca();
         ucitajVozilo();
-        definirajDatum();
+        definirajDatumPocetka();
         ucitaj();
     }
     
     
-    private void definirajDatum() {
-        DatePickerSettings dps= new DatePickerSettings(Locale.of("hr","HR"));
-        dps.setFormatForDatesCommonEra("dd.MM.YYYY");
-        dps.setTranslationClear("Očisti");
-        dps.setTranslationToday("Danas");
-        dtpDatum.datePicker.setSettings(dps);
-        
-        TimePickerSettings tps=dtpDatum.timePicker.getSettings();
-        
-        tps.setFormatForDisplayTime("HH:mm");
-        tps.use24HourClockFormat();
-        
-        ArrayList<LocalTime> lista= new ArrayList<>();
-        for(int i=0;i<24;i++){
-            for(int j=0;j<60;j++){
-                lista.add(LocalTime.of(i, j));
-            }
-        }
-        tps.generatePotentialMenuTimes(lista);
-        
-    }
+     private void definirajDatumPocetka(){
+         DatePickerSettings dps = new DatePickerSettings(Locale.of("hr","HR"));
+         dps.setFormatForDatesCommonEra("dd. MM. YYYY.");
+         dps.setTranslationClear("Očisti");
+         dps.setTranslationToday("Danas");
+         dtpDatumPocetka.datePicker.setSettings(dps);
+         
+         TimePickerSettings tps = dtpDatumPocetka.timePicker.getSettings();
+    
+         tps.setFormatForDisplayTime("HH:mm");
+         tps.use24HourClockFormat();
+         
+         ArrayList<LocalTime> lista = new ArrayList<>();
+         for(int i =0;i<24;i++){
+             for(int j = 0;j<60;j=j+10){
+                 lista.add(LocalTime.of(i,j));
+             }
+         }
+         
+         tps.generatePotentialMenuTimes(lista);
+         
+         
+         
+     }
     
     
 
@@ -164,7 +166,7 @@ public class ProzorRacun extends javax.swing.JFrame implements AutokucaViewSucel
         jLabel4 = new javax.swing.JLabel();
         btnIspisRacuna = new javax.swing.JButton();
         btnPVozilo = new javax.swing.JButton();
-        dtpDatum = new com.github.lgooddatepicker.components.DateTimePicker();
+        dtpDatumPocetka = new com.github.lgooddatepicker.components.DateTimePicker();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -281,7 +283,7 @@ public class ProzorRacun extends javax.swing.JFrame implements AutokucaViewSucel
                                         .addComponent(cmbVozilo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGap(18, 18, 18)
                                     .addComponent(btnPVozilo, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(dtpDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(dtpDatumPocetka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel5)))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addGap(91, 91, 91)
@@ -315,7 +317,7 @@ public class ProzorRacun extends javax.swing.JFrame implements AutokucaViewSucel
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
-                .addComponent(dtpDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(dtpDatumPocetka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDodaj)
@@ -484,7 +486,7 @@ public class ProzorRacun extends javax.swing.JFrame implements AutokucaViewSucel
     
     XWPFParagraph datum=document.createParagraph();
     XWPFRun datumFRun=datum.createRun();
-    datumFRun.setText("Datum izdavanja računa:" + e.getDatum());
+    datumFRun.setText("Datum izdavanja računa:" + e.getDatumPocetka());
 
     try {
         JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getFileSystemView().getHomeDirectory());
@@ -527,7 +529,7 @@ public class ProzorRacun extends javax.swing.JFrame implements AutokucaViewSucel
     private javax.swing.JComboBox<Kupac> cmbKupac;
     private javax.swing.JComboBox<Prodavac> cmbProdavac;
     private javax.swing.JComboBox<Vozilo> cmbVozilo;
-    private com.github.lgooddatepicker.components.DateTimePicker dtpDatum;
+    private com.github.lgooddatepicker.components.DateTimePicker dtpDatumPocetka;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -555,13 +557,13 @@ public class ProzorRacun extends javax.swing.JFrame implements AutokucaViewSucel
         e.setProdavac((Prodavac)cmbProdavac.getSelectedItem());
         e.setVozilo((Vozilo)cmbVozilo.getSelectedItem());
         
-        LocalDate ld= dtpDatum.datePicker.getDate();
-        LocalTime lt=dtpDatum.timePicker.getTime();
         
-        LocalDateTime ldt= LocalDateTime.of(ld, lt);
+        LocalDate ld = dtpDatumPocetka.datePicker.getDate();
+        LocalTime lt = dtpDatumPocetka.timePicker.getTime();
         
-        e.setDatum(Date.from(ldt.atZone(ZoneId.systemDefault()).toInstant()));
+        LocalDateTime ldt = LocalDateTime.of(ld,lt);
         
+        e.setDatumPocetka(java.sql.Date.from(ldt.atZone(ZoneId.systemDefault()).toInstant()));
         
         
     }
@@ -575,18 +577,20 @@ public class ProzorRacun extends javax.swing.JFrame implements AutokucaViewSucel
         cmbProdavac.setSelectedItem(e.getProdavac());
         cmbVozilo.setSelectedItem(e.getVozilo());
         
-        if (e.getDatum() == null) {
-            dtpDatum.datePicker.setDate(null);
-            dtpDatum.timePicker.setTime(null);
-        } else {
-            LocalDateTime ldt = e.getDatum().toInstant()
-                .atZone(ZoneId.systemDefault())
-                .toLocalDateTime();
-            LocalDate ld = ldt.toLocalDate();
-            LocalTime lt = ldt.toLocalTime();
-            dtpDatum.datePicker.setDate(ld);
-            dtpDatum.timePicker.setTime(lt);
-}
+        if(e.getDatumPocetka()==null){
+            dtpDatumPocetka.datePicker.setDate(null);
+            dtpDatumPocetka.timePicker.setTime(null);
+        }else{
+            LocalDate ld = e.getDatumPocetka().toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalDate();
+            dtpDatumPocetka.datePicker.setDate(ld);
+            
+            LocalTime lt = e.getDatumPocetka().toInstant()
+                    .atZone(ZoneId.systemDefault())
+                    .toLocalTime();
+            dtpDatumPocetka.timePicker.setTime(lt);
+        }
         }
         
         

@@ -130,7 +130,7 @@ public class PocetniInsert {
             r.setKupac(kupci.get(faker.number().numberBetween(0, BROJ_KUPCA)));
             r.setVozilo(vozilo.get(i));
             r.setProdavac(prodavaci.get(faker.number().numberBetween(0, BROJ_PRODAVACA)));
-            r.setDatum(faker.date().birthday());
+            r.setDatumPocetka(faker.date().birthday());
             session.persist(r);
             
             
