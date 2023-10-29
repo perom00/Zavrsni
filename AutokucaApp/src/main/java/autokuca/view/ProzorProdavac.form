@@ -52,6 +52,10 @@
                       <Component id="btnPromjeni" alignment="0" pref="162" max="32767" attributes="0"/>
                       <Component id="btnDodaj" alignment="0" max="32767" attributes="0"/>
                   </Group>
+                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtIban" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
+                  <Component id="txtOib" alignment="0" min="-2" pref="199" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="94" pref="225" max="32767" attributes="0"/>
           </Group>
@@ -89,7 +93,15 @@
                       <Component id="btnPromjeni" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnObrisi" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="60" pref="182" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txtIban" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                      <Component id="txtOib" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="56" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -176,6 +188,20 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtUvjetActionPerformed"/>
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtUvjetKeyPressed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Iban"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtIban">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel5">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="OIB"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtOib">
     </Component>
   </SubComponents>
 </Form>

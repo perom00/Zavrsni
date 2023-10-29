@@ -83,6 +83,8 @@ public class PocetniInsert {
             p=new Prodavac();
             p.setIme(faker.name().firstName());
             p.setPrezime(faker.name().lastName());
+            p.setIban(faker.business().creditCardNumber());
+            p.setOib(Alati.getOib());
             session.persist(p);
             prodavaci.add(p);
         }

@@ -72,5 +72,7 @@ public abstract class Obrada<T extends Entitet>{
             session.refresh(entitet);
         }
     }   
+
+   
    
 }

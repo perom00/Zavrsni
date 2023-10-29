@@ -50,6 +50,10 @@ public class ProzorProdavac extends javax.swing.JFrame implements AutokucaViewSu
         jLabel4 = new javax.swing.JLabel();
         btnTrazi = new javax.swing.JButton();
         txtUvjet = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtIban = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtOib = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -106,6 +110,10 @@ public class ProzorProdavac extends javax.swing.JFrame implements AutokucaViewSu
             }
         });
 
+        jLabel3.setText("Iban");
+
+        jLabel5.setText("OIB");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -132,7 +140,11 @@ public class ProzorProdavac extends javax.swing.JFrame implements AutokucaViewSu
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(btnObrisi, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnPromjeni, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-                        .addComponent(btnDodaj, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(btnDodaj, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5)
+                    .addComponent(txtIban, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtOib, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(94, 225, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -163,7 +175,15 @@ public class ProzorProdavac extends javax.swing.JFrame implements AutokucaViewSu
                         .addComponent(btnPromjeni)
                         .addGap(18, 18, 18)
                         .addComponent(btnObrisi)
-                        .addGap(60, 182, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtIban, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19)
+                        .addComponent(jLabel5)
+                        .addGap(13, 13, 13)
+                        .addComponent(txtOib, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(56, Short.MAX_VALUE))))
         );
 
         pack();
@@ -260,10 +280,14 @@ public class ProzorProdavac extends javax.swing.JFrame implements AutokucaViewSu
     private javax.swing.JButton btnTrazi;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<Prodavac> lstPodaci;
+    private javax.swing.JTextField txtIban;
     private javax.swing.JTextField txtIme;
+    private javax.swing.JTextField txtOib;
     private javax.swing.JTextField txtPrezime;
     private javax.swing.JTextField txtUvjet;
     // End of variables declaration//GEN-END:variables
@@ -281,6 +305,8 @@ public class ProzorProdavac extends javax.swing.JFrame implements AutokucaViewSu
         var e=obrada.getEntitet();
         e.setIme(txtIme.getText());
         e.setPrezime(txtPrezime.getText());
+        e.setIban(txtIban.getText());
+        e.setOib(txtOib.getText());
         
     }
 
@@ -291,6 +317,8 @@ public class ProzorProdavac extends javax.swing.JFrame implements AutokucaViewSu
         
         txtIme.setText(e.getIme());
         txtPrezime.setText(e.getPrezime());
+        txtIban.setText(e.getIban());
+        txtOib.setText(e.getOib());
         
         
     }

@@ -111,15 +111,35 @@ public class ObradaProdavac extends Obrada<Prodavac>{
     }
     private void kontrolaDuplikata() throws AutokucaException{
       
-        List<Prodavac> osobe = session.createQuery("SELECT p FROM Prodavac p WHERE p.ime = :ime AND p.prezime = :prezime", Prodavac.class)
+        List<Prodavac> osobe = session.createQuery("SELECT p FROM Prodavac p WHERE p.ime = :ime AND p.prezime = :prezime AND p.oib=:oib AND p.iban=:iban", Prodavac.class)
                 .setParameter("ime", entitet.getIme())
                 .setParameter("prezime", entitet.getPrezime())
+                .setParameter("oib", entitet.getOib())
+                .setParameter("iban", entitet.getIban())
                 .getResultList();
 
         if (!osobe.isEmpty()) {
-            throw new AutokucaException("Ime i prezime već postoje u bazi podataka.");
+            throw new AutokucaException("Ime,prezime i oib već postoje u bazi podataka.");
         }
     }
+    
+    
+    private void kontrolaOib() throws AutokucaException {
+        
+
+        // ako postoji isti oib u bazi ne može se dodjeliti ovoj osobi
+        List<Prodavac> lista = session.createQuery("from Predavac p where p.oib =:uvjet "
+                + " and p.sifra!=:sifra",Prodavac.class)
+                .setParameter("uvjet", entitet.getOib())
+                .setParameter("sifra", entitet.getSifra()==null ? 0 : entitet.getSifra())
+                .list();
+        
+        if(lista!=null && !lista.isEmpty()){
+            throw new AutokucaException("OIB je zauzet!");
+        }       
+    }
+    
+    
     
     }
     
